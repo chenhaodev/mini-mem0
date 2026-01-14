@@ -1,10 +1,10 @@
-# Homecare Memory Lite
+# Mini-mem0
 
 A simplified, high-performance memory management system for at-home care applications, based on [mem0ai/mem0](https://github.com/mem0ai/mem0) but optimized for speed and simplicity.
 
 ## 🎯 Overview
 
-Homecare Memory Lite provides an intelligent memory layer for AI agents in at-home care settings, with a focus on:
+Mini-mem0 provides an intelligent memory layer for AI agents in at-home care settings, with a focus on:
 
 - **90% faster write operations** than full mem0 (~200ms vs ~2000ms)
 - **Sub-100ms search latency** for real-time clinical use
@@ -14,7 +14,7 @@ Homecare Memory Lite provides an intelligent memory layer for AI agents in at-ho
 
 ## 📊 Performance Comparison
 
-| Metric | mem0 Baseline | Homecare Memory Lite | Improvement |
+| Metric | mem0 Baseline | Mini-mem0 | Improvement |
 |--------|---------------|----------------------|-------------|
 | Search Latency (p95) | 148-476ms | <100ms | 33-79% faster |
 | Write Latency (p95) | ~2000ms | <200ms | **90% faster** |
@@ -26,7 +26,7 @@ Homecare Memory Lite provides an intelligent memory layer for AI agents in at-ho
 
 ### Simplified Design
 
-Homecare Memory Lite removes unnecessary complexity from mem0:
+Mini-mem0 removes unnecessary complexity from mem0:
 
 1. **No LLM-based Conflict Resolution** - Rule-based updates (eliminates ~1.5s per write)
 2. **Reduced Vector Search** - Top 3 results instead of 10 (70% less processing)
@@ -35,7 +35,7 @@ Homecare Memory Lite removes unnecessary complexity from mem0:
 ### Core Components
 
 ```
-homecare_memory/
+mini-mem0/
 ├── api/                 # FastAPI REST endpoints
 │   ├── routes.py        # CRUD operations
 │   └── schemas.py       # Request/response models
@@ -63,7 +63,7 @@ homecare_memory/
 1. **Clone and setup virtual environment:**
 
 ```bash
-cd homecare_memory
+cd mini-mem0
 python -m venv venv_linux
 source venv_linux/bin/activate  # On Windows: venv_linux\Scripts\activate
 pip install -r requirements.txt
@@ -215,7 +215,7 @@ Response:
 pytest tests/ -v
 
 # Run with coverage
-pytest tests/ -v --cov=homecare_memory --cov-report=html
+pytest tests/ -v --cov=mini-mem0 --cov-report=html
 
 # Run specific test suites
 pytest tests/test_memory_manager.py -v
@@ -346,10 +346,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY homecare_memory/ ./homecare_memory/
+COPY mini-mem0/ ./mini-mem0/
 COPY .env .
 
-CMD ["uvicorn", "homecare_memory.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "mini-mem0.main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ### Production Considerations
@@ -363,12 +363,6 @@ CMD ["uvicorn", "homecare_memory.main:app", "--host", "0.0.0.0", "--port", "8000
 7. Implement authentication (OAuth2, JWT)
 
 ## 📝 Development
-
-### Code Style
-
-- Format with `black`: `black homecare_memory/`
-- Lint with `ruff`: `ruff check homecare_memory/ --fix`
-- Type check with `mypy`: `mypy homecare_memory/ --strict`
 
 ### Adding New Features
 
