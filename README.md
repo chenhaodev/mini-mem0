@@ -54,7 +54,7 @@ mini-mem0/
 
 ### Prerequisites
 
-- Python 3.10+
+- Python 3.12+
 - PostgreSQL 15+
 - OpenAI API key
 
@@ -64,8 +64,8 @@ mini-mem0/
 
 ```bash
 cd mini-mem0
-python -m venv venv_linux
-source venv_linux/bin/activate  # On Windows: venv_linux\Scripts\activate
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
@@ -96,9 +96,9 @@ psql -h localhost -U homecare -d homecare_db -f db/migrations/001_init.sql
 4. **Run the service:**
 
 ```bash
-python -m homecare_memory.main
+python main.py
 # Or with uvicorn:
-uvicorn homecare_memory.main:app --reload --port 8000
+uvicorn main:app --reload --port 8000
 ```
 
 5. **Access API documentation:**
@@ -340,16 +340,15 @@ If migrating from full mem0:
 ### Docker (Optional)
 
 ```dockerfile
-FROM python:3.10-slim
+FROM python:3.12-slim
 
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-COPY mini-mem0/ ./mini-mem0/
-COPY .env .
+COPY . .
 
-CMD ["uvicorn", "mini-mem0.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
 ### Production Considerations

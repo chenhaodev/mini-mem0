@@ -3,7 +3,7 @@
 import pytest
 import asyncio
 
-from homecare_memory.core.memory_manager import MemoryManager
+from core.memory_manager import MemoryManager
 
 
 @pytest.mark.asyncio

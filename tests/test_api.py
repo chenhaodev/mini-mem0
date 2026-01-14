@@ -1,15 +1,16 @@
 """Tests for API endpoints."""
 
 import pytest
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 
-from homecare_memory.main import app
+from main import app
 
 
 @pytest.mark.asyncio
 async def test_health_check():
     """Test health check endpoint."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
         response = await client.get("/api/v1/health")
 
         assert response.status_code == 200
@@ -20,7 +21,8 @@ async def test_health_check():
 @pytest.mark.asyncio
 async def test_root_endpoint():
     """Test root endpoint."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
         response = await client.get("/")
 
         assert response.status_code == 200
@@ -32,7 +34,8 @@ async def test_root_endpoint():
 @pytest.mark.asyncio
 async def test_add_memory_endpoint_validation():
     """Test add memory endpoint input validation."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
         # Invalid request: empty conversation
         response = await client.post(
             "/api/v1/memories",
@@ -48,7 +51,8 @@ async def test_add_memory_endpoint_validation():
 @pytest.mark.asyncio
 async def test_search_endpoint_validation():
     """Test search endpoint input validation."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
         # Invalid request: missing required fields
         response = await client.post(
             "/api/v1/memories/search",
@@ -61,7 +65,8 @@ async def test_search_endpoint_validation():
 @pytest.mark.asyncio
 async def test_update_memory_endpoint_validation():
     """Test update memory endpoint validation."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
         # Invalid memory ID format
         response = await client.patch(
             "/api/v1/memories/invalid-uuid",

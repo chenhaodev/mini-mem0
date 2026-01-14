@@ -6,9 +6,9 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from homecare_memory.api.routes import router
-from homecare_memory.db.pool import initialize_database, close_database
-from homecare_memory.settings import load_settings
+from api.routes import router
+from db.pool import initialize_database, close_database
+from settings import load_settings
 
 # Configure logging
 logging.basicConfig(
@@ -95,7 +95,7 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run(
-        "homecare_memory.main:app",
+        "main:app",
         host="0.0.0.0",
         port=8000,
         reload=True,

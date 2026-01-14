@@ -4,7 +4,7 @@ from pydantic import BaseModel, Field
 from typing import List, Optional
 from uuid import UUID
 
-from homecare_memory.core.models import Memory, MemorySearchResult, MemoryCategory
+from core.models import Memory, MemorySearchResult, MemoryCategory
 
 
 class AddMemoryRequest(BaseModel):

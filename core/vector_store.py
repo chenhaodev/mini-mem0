@@ -5,9 +5,8 @@ import logging
 from typing import List, Dict, Any, Optional
 
 import chromadb
-from chromadb.config import Settings as ChromaSettings
 
-from homecare_memory.settings import load_settings
+from settings import load_settings
 
 logger = logging.getLogger(__name__)
 
@@ -15,22 +14,24 @@ logger = logging.getLogger(__name__)
 class VectorStore:
     """Manages vector storage and similarity search using ChromaDB."""
 
-    def __init__(self, persist_directory: Optional[str] = None):
+    def __init__(self, persist_directory: Optional[str] = None, ephemeral: bool = False):
         """
         Initialize ChromaDB client.
 
         Args:
             persist_directory: Directory for persistent storage (optional, loads from settings if not provided)
+            ephemeral: If True, use in-memory storage (for testing)
         """
-        if persist_directory is None:
-            settings = load_settings()
-            persist_directory = settings.chroma_persist_dir
+        if ephemeral:
+            # Use ephemeral client for testing
+            self.client = chromadb.EphemeralClient()
+        else:
+            if persist_directory is None:
+                settings = load_settings()
+                persist_directory = settings.chroma_persist_dir
 
-        # CRITICAL: Use persistent mode, not in-memory
-        self.client = chromadb.Client(ChromaSettings(
-            persist_directory=persist_directory,
-            anonymized_telemetry=False
-        ))
+            # Use persistent client for production
+            self.client = chromadb.PersistentClient(path=persist_directory)
 
         # Single collection for all memories (patient_id in metadata for filtering)
         self.collection_name = "homecare_memories"

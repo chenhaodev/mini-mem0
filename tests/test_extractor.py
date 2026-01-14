@@ -3,8 +3,8 @@
 import pytest
 from unittest.mock import AsyncMock, MagicMock
 
-from homecare_memory.core.extractor import MemoryExtractor
-from homecare_memory.core.models import MemoryCategory, Priority
+from core.extractor import MemoryExtractor
+from core.models import MemoryCategory, Priority
 
 
 @pytest.mark.asyncio

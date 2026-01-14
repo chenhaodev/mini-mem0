@@ -6,7 +6,7 @@ from contextlib import asynccontextmanager
 from typing import Optional
 import logging
 
-from homecare_memory.settings import load_settings
+from settings import load_settings
 
 logger = logging.getLogger(__name__)
 

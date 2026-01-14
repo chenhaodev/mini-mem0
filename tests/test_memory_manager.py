@@ -3,8 +3,8 @@
 import pytest
 import time
 
-from homecare_memory.core.memory_manager import MemoryManager
-from homecare_memory.core.models import Priority, MemoryCategory
+from core.memory_manager import MemoryManager
+from core.models import Priority, MemoryCategory
 
 
 @pytest.mark.asyncio
@@ -135,8 +135,8 @@ async def test_get_patient_summary(test_memory_manager: MemoryManager):
 @pytest.mark.asyncio
 async def test_is_contradiction_detection():
     """Test contradiction detection logic."""
-    from homecare_memory.core.memory_manager import MemoryManager
-    from homecare_memory.core.models import ExtractedMemory, Memory, MemoryCategory
+    from core.memory_manager import MemoryManager
+    from core.models import ExtractedMemory, Memory, MemoryCategory
     from uuid import uuid4
     from datetime import datetime
 

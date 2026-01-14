@@ -2,7 +2,7 @@
 
 import pytest
 
-from homecare_memory.core.vector_store import VectorStore
+from core.vector_store import VectorStore
 
 
 @pytest.mark.asyncio

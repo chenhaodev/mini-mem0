@@ -5,7 +5,7 @@ from uuid import UUID
 
 from fastapi import APIRouter, HTTPException, Depends
 
-from homecare_memory.api.schemas import (
+from api.schemas import (
     AddMemoryRequest,
     AddMemoryResponse,
     SearchMemoryRequest,
@@ -13,11 +13,11 @@ from homecare_memory.api.schemas import (
     UpdateMemoryRequest,
     PatientSummaryResponse
 )
-from homecare_memory.core.models import Memory
-from homecare_memory.core.memory_manager import MemoryManager
-from homecare_memory.core.extractor import memory_extractor
-from homecare_memory.core.vector_store import vector_store
-from homecare_memory.db.pool import db_pool
+from core.models import Memory
+from core.memory_manager import MemoryManager
+from core.extractor import memory_extractor
+from core.vector_store import vector_store
+from db.pool import db_pool
 
 logger = logging.getLogger(__name__)
 

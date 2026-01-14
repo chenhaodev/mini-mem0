@@ -8,18 +8,18 @@ from datetime import datetime, timedelta
 
 from openai import AsyncOpenAI
 
-from homecare_memory.core.models import (
+from core.models import (
     Memory,
     ExtractedMemory,
     MemoryCategory,
     Priority,
     MemorySearchResult
 )
-from homecare_memory.core.extractor import MemoryExtractor
-from homecare_memory.core.vector_store import VectorStore
-from homecare_memory.db.pool import DatabasePool
-from homecare_memory.settings import load_settings
-from homecare_memory.api.schemas import (
+from core.extractor import MemoryExtractor
+from core.vector_store import VectorStore
+from db.pool import DatabasePool
+from settings import load_settings
+from api.schemas import (
     AddMemoryResponse,
     SearchMemoryResponse,
     PatientSummaryResponse

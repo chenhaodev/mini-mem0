@@ -6,13 +6,13 @@ import os
 from typing import AsyncGenerator
 from unittest.mock import AsyncMock, MagicMock
 
-from httpx import AsyncClient
+from httpx import AsyncClient, ASGITransport
 
-from homecare_memory.main import app
-from homecare_memory.db.pool import DatabasePool
-from homecare_memory.core.vector_store import VectorStore
-from homecare_memory.core.extractor import MemoryExtractor
-from homecare_memory.core.memory_manager import MemoryManager
+from main import app
+from db.pool import DatabasePool
+from core.vector_store import VectorStore
+from core.extractor import MemoryExtractor
+from core.memory_manager import MemoryManager
 
 
 # Set test environment
@@ -77,8 +77,8 @@ async def test_db() -> AsyncGenerator[DatabasePool, None]:
 @pytest.fixture
 async def test_vector_store() -> AsyncGenerator[VectorStore, None]:
     """Provide test vector store with in-memory ChromaDB."""
-    # Use test directory for Chroma
-    vector_store = VectorStore(persist_directory="./test_chroma_db")
+    # Use ephemeral client for testing
+    vector_store = VectorStore(ephemeral=True)
 
     yield vector_store
 
@@ -156,5 +156,6 @@ async def test_memory_manager(
 @pytest.fixture
 async def test_client() -> AsyncGenerator[AsyncClient, None]:
     """Provide test HTTP client."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    transport = ASGITransport(app=app)
+    async with AsyncClient(transport=transport, base_url="http://test") as client:
         yield client

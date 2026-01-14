@@ -6,8 +6,8 @@ import json
 
 from openai import AsyncOpenAI
 
-from homecare_memory.core.models import ExtractedMemory, MemoryCategory, Priority
-from homecare_memory.settings import load_settings
+from core.models import ExtractedMemory, MemoryCategory, Priority
+from settings import load_settings
 
 logger = logging.getLogger(__name__)
 
