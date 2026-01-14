@@ -1,0 +1,46 @@
+# Environment variables (contains secrets)
+.env
+
+# Virtual environments
+venv/
+venv_linux/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+test_chroma_db/
+
+# Database and logs
+chroma_db/
+*.log
+*.db
+*.sqlite
+
+# Test files
+test_request*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
