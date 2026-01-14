@@ -28,10 +28,9 @@ Homecare Memory Lite provides an intelligent memory layer for AI agents in at-ho
 
 Homecare Memory Lite removes unnecessary complexity from mem0:
 
-1. **No Graph Database** - Vector-only approach (eliminates 0.328s overhead)
-2. **No LLM-based Conflict Resolution** - Rule-based updates (eliminates ~1.5s per write)
-3. **Reduced Vector Search** - Top 3 results instead of 10 (70% less processing)
-4. **Fast-path for Normal Priority** - Only validate critical memories (allergies, medications)
+1. **No LLM-based Conflict Resolution** - Rule-based updates (eliminates ~1.5s per write)
+2. **Reduced Vector Search** - Top 3 results instead of 10 (70% less processing)
+3. **Fast-path for Normal Priority** - Only validate critical memories (allergies, medications)
 
 ### Core Components
 
@@ -379,10 +378,6 @@ CMD ["uvicorn", "homecare_memory.main:app", "--host", "0.0.0.0", "--port", "8000
 4. Write tests in `tests/`
 5. Update this README
 
-## 📄 License
-
-[Your License Here]
-
 ## 🙏 Acknowledgments
 
 - Built on insights from [mem0ai/mem0](https://github.com/mem0ai/mem0)
@@ -390,11 +385,8 @@ CMD ["uvicorn", "homecare_memory.main:app", "--host", "0.0.0.0", "--port", "8000
 - Healthcare use case patterns from [Mem0 Healthcare](https://mem0.ai/usecase/healthcare)
 
 ## 📞 Support
-
 For issues and questions:
-- GitHub Issues: [Your Repo]
 - Documentation: http://localhost:8000/docs
-- Architecture Details: See PRP at `PRPs/homecare-memory-lite.md`
 
 ---
 
